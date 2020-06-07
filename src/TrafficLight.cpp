@@ -76,11 +76,11 @@ void TrafficLight::cycleThroughPhases()
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-        std::default_random_engine generator;
+        std::default_random_engine generator(std::random_device{}());
         std::uniform_real_distribution<double> distribution(4.0,6.0);
         double durationSec = distribution(generator);
         int durationMSec= durationSec * 1000;
-        std::cout<< std::endl<< " durationMSec = " << durationMSec << std::endl;
+
         std::this_thread::sleep_for(std::chrono::milliseconds(durationMSec));
 
         TrafficLightPhase newPhase = (_currentPhase == TrafficLightPhase::red) ? TrafficLightPhase::green : TrafficLightPhase::red;
